@@ -1,12 +1,17 @@
 
 package Vista;
 
+import Controlador.C_Concepto;
+import javax.swing.table.DefaultTableModel;
+
 public class CuenBe extends javax.swing.JFrame {
 
+    private DefaultTableModel modelo;
     
     public CuenBe() {
         initComponents();
         setLocationRelativeTo(null);
+        rellenarTablaConceptos();
     }
 
     
@@ -96,6 +101,11 @@ public class CuenBe extends javax.swing.JFrame {
 
         btnRegistrarConcepto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnRegistrarConcepto.setText("Registrar");
+        btnRegistrarConcepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarConceptoActionPerformed(evt);
+            }
+        });
 
         btnModificarConcepto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnModificarConcepto.setText("Modificar");
@@ -265,6 +275,23 @@ public class CuenBe extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRegistrarConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarConceptoActionPerformed
+        
+    }//GEN-LAST:event_btnRegistrarConceptoActionPerformed
+    
+    private void rellenarTablaConceptos(){
+        Object[] filaConcepto = new Object[4];
+        modelo = (DefaultTableModel) tablaConceptos.getModel();
+        
+        for(int i = 0; i<C_Concepto.listaConceptos().size(); i++){
+            filaConcepto[0] = C_Concepto.listaConceptos().get(i).getIdConcepto();
+            filaConcepto[1] = C_Concepto.listaConceptos().get(i).getNombre();
+            filaConcepto[2] = C_Concepto.listaConceptos().get(i).getFechaInicio();
+            filaConcepto[3] = C_Concepto.listaConceptos().get(i).getTotal();
+            modelo.addRow(filaConcepto);
+        }
+        tablaConceptos.setModel(modelo);
+    }
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
